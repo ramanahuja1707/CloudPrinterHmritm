@@ -8,34 +8,34 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>Cloud Printer HMRITM</title>
 </head>
-
 <body>
-	<h1>Cloud Printer HMRITM</h1>
-	<form action="login" method="post">
-		<table>
+	<center>
+		<h1>Cloud Printer HMRITM</h1>
+		<form action="login" method="post">
+			<table>
 
-			<tr>
+				<tr>
+					<td>Login Id:<input type="text" name="loginId" /></td>
+				</tr>
+				<tr>
 
-				<td>Login Id:<input type="text" name="loginId" /></td>
-			</tr>
-			<tr>
+					<td>Password:<input type="password" name="password" /></td>
+				</tr>
+				<tr>
 
-				<td>Password:<input type="password" name="password" /></td>
-			</tr>
-			<tr>
+					<td>Mail Id:<input type="text" name="mailId" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Login" /></td>
+				</tr>
+			</table>
+			<s:property value="loginError" />
+			<s:property value="registrationStatus" />
+			<br>
 
-				<td>Mail Id:<input type="text" name="mailId" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Login" /></td>
-			</tr>
-		</table>
-		<s:property value="loginError" />
-		<s:property value="registrationStatus" />
-		<br>
-		
-	</form>
-	<br>
-	<a href="registerUser.jsp"><input type="button" value="Register"></a>
+		</form>
+		<br> <a href="registerUser.jsp"><input type="button"
+			value="Register"></a>
+	</center>
 </body>
 </html>

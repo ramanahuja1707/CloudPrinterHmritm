@@ -49,6 +49,12 @@ public class RegistrationService {
 			ob.put(user);
 			ob.put(userLoginInfo);
 
+			// sending the mail
+			PasswordMailingService password = new PasswordMailingService();
+			password.sendMail(userInformation.getEmailId(),
+					userInformation.getLoginId(), userInformation.getUserName()
+							+ "@" + userInformation.getLoginId());
+
 			// updating the service status
 			rs = new RegistrationStatus();
 			rs.setErrors(null);

@@ -16,6 +16,7 @@
 		<action name="registeruser" class="com.cloudprinter.action.Register">
 			<result name="success">login.jsp</result>
 			<result name="failure">registerUser.jsp</result>
+			<result name="user_exist">registerUser.jsp</result>
 			<result name="input">registerUser.jsp</result>
 		</action>
 	</package>

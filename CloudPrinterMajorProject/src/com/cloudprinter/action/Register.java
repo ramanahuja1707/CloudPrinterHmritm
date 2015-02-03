@@ -3,6 +3,7 @@ package com.cloudprinter.action;
 import com.cloudprinter.dto.RegistrationStatus;
 import com.cloudprinter.dto.UserInfo;
 import com.cloudprinter.exceptions.RegistrationException;
+import com.cloudprinter.services.AuthenticateUserService;
 import com.cloudprinter.services.RegistrationService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -38,25 +39,35 @@ public class Register extends ActionSupport {
 
 	@Override
 	public String execute() {
-		try {
-			RegistrationService register = new RegistrationService();
-			RegistrationStatus registrationStatus = register
-					.registerUser(userInformation);
-			if (registrationStatus.getStatus().equals("registered")) {
-				setRegistrationStatus("User Registered...");
-				return "success";
-			} else {
-				setRegistrationStatus("User Not Registered...");
-				setRegistrationError(registrationStatus.getErrors().get(0));
+		AuthenticateUserService authenticateUser = new AuthenticateUserService();
+		String userStatus = authenticateUser.authenticateUser(
+				getUserInformation().getLoginId(), getUserInformation()
+						.getEmailId());
+		if (userStatus.matches("not_exist")) {
+			try {
+				RegistrationService register = new RegistrationService();
+				RegistrationStatus registrationStatus = register
+						.registerUser(userInformation);
+				if (registrationStatus.getStatus().equals("registered")) {
+					setRegistrationStatus("User Registered...");
+					return "success";
+				} else {
+					setRegistrationStatus("User Not Registered...");
+					setRegistrationError(registrationStatus.getErrors().get(0));
+					return "failure";
+				}
+			} catch (RegistrationException e) {
+				setRegistrationError("INVALID CREDENTIALS..." + e.getMessage());
 				return "failure";
-			}
-		} catch (RegistrationException e) {
-			setRegistrationError("INVALID CREDENTIALS..." + e.getMessage());
-			return "failure";
-		} catch (Exception e) {
-			setRegistrationError("INVALID CREDENTIALS...");
-			return "failure";
+			} catch (Exception e) {
+				setRegistrationError("INVALID CREDENTIALS...");
+				return "failure";
 
+			}
+
+		} else {
+			setRegistrationError("USER ALREADY EXIST WITH CORRESPONDING EMAIL-ID...");
+			return "user_exist";
 		}
 	}
 
