@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="default" extends="struts-default">
+		<action name="login" class="com.cloudprinter.action.Login">
+			<result name="success">success.jsp</result>
+			<result name="error">index.jsp</result>
+			<result name="input">index.jsp</result>
+		</action>
+		<action name="objectifystart" class="com.cloudprinter.action.ObjectifyStart">
+			<result name="success">login.jsp</result>
+		</action>
+		<action name="registeruser" class="com.cloudprinter.action.Register">
+			<result name="success">login.jsp</result>
+			<result name="failure">registerUser.jsp</result>
+			<result name="input">registerUser.jsp</result>
+		</action>
+	</package>
+</struts>
