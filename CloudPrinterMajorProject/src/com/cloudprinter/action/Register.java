@@ -78,6 +78,7 @@ public class Register extends ActionSupport {
 					"Age should be in between 22-60..");
 		}
 		if (getUserInformation().getAlternateEmail() == null) {
+
 			addFieldError("userInformation.alternateEmail",
 					"Invalid Email-id..");
 		}

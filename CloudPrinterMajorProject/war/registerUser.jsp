@@ -25,7 +25,7 @@
 			<s:textfield key="userInformation.contactNumber" label="Mobile No." />
 			<s:submit value="Register" />
 		</s:form>
-
+		<s:property value="registrationStatus" />
 		<s:property value="registrationError" />
 	</center>
 </body>

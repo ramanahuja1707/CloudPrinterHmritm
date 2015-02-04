@@ -8,8 +8,8 @@ import com.cloudprinter.exceptions.RegistrationException;
 @Entity
 public class UserInfo {
 	@Id
-	String userId;// userName+"-"+userNumber +"@"+loginId
-	String userName;
+	private String userId;// userName+"-"+userNumber +"@"+loginId
+	private String userName;
 	String loginId; // foreign key
 	String age;
 	String gender;
