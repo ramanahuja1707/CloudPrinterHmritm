@@ -34,9 +34,15 @@ public class UserInfo {
 	// userName of 8 characters minimum
 	public void setUserName(String userName) throws RegistrationException {
 		if (userName.length() >= 8)
+		{
+			
 			this.userName = userName;
+		}
 		else
+		{
+			
 			throw new RegistrationException("UserName Is Invalid");
+		}
 	}
 
 	public String getLoginId() {
