@@ -1,7 +1,14 @@
 package com.cloudprinter.services;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
+import javax.mail.MessagingException;
+
+import org.mortbay.log.Log;
+
+import com.cloudprinter.action.Login;
 import com.cloudprinter.dto.RegistrationStatus;
 import com.cloudprinter.dto.UserInfo;
 import com.cloudprinter.dto.UserLoginInfo;
@@ -9,6 +16,8 @@ import com.cloudprinter.exceptions.RegistrationException;
 import com.googlecode.objectify.Objectify;
 
 public class RegistrationService {
+	private static final Logger log = Logger
+			.getLogger(RegistrationService.class.getName());
 	private RegistrationStatus rs;
 	private UserInfo user;
 	private RegistrationService registerUser;
@@ -17,9 +26,10 @@ public class RegistrationService {
 
 	@SuppressWarnings("unused")
 	public RegistrationStatus registerUser(UserInfo userInformation)
-			throws RegistrationException, Exception {
+			throws RegistrationException, UnsupportedEncodingException, MessagingException {
 		registerUser = new RegistrationService();
 		if (userInformation != null) {
+			log.info("User Info is not null...");
 			Objectify ob = ObjectifyRegisterService.registerService();
 			user = new UserInfo();
 			userLoginInfo = new UserLoginInfo();
@@ -29,7 +39,7 @@ public class RegistrationService {
 			userLoginInfo.setPassword(userInformation.getUserName() + "@"
 					+ userInformation.getLoginId());
 			userLoginInfo.setUserId(userInformation.getUserName() + "-"
-					+ (userNumber++) + "@" + userInformation.getLoginId());
+					+ (userNumber) + "@" + userInformation.getLoginId());
 
 			// adding user to UserInfo
 			user.setUserId(userInformation.getUserName() + "-" + (userNumber)
@@ -48,6 +58,7 @@ public class RegistrationService {
 			// saving the data in UserInfo & UserLoginInfo
 			ob.put(user);
 			ob.put(userLoginInfo);
+			log.info("User Data Saved...");
 
 			// sending the mail
 			PasswordMailingService password = new PasswordMailingService();
@@ -59,6 +70,7 @@ public class RegistrationService {
 			rs = new RegistrationStatus();
 			rs.setErrors(null);
 			rs.setStatus("registered");
+			
 
 			// increementing the user number
 			userNumber++;

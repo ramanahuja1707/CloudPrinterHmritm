@@ -1,16 +1,16 @@
 package com.cloudprinter.action;
 
-import com.cloudprinter.logger.CloudPrinterLogger;
+import java.util.logging.Logger;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 public class Login extends ActionSupport {
-
-	String loginId;
-	String mailId;
-	String password;
-	String loginError;
-	private static String FQCN=Login.class.getName();
+	private static final Logger log = Logger.getLogger(Login.class.getName());
+	private String loginId;
+	private String mailId;
+	private String password;
+	private String loginError;
 
 	public String getLoginError() {
 		return loginError;
@@ -47,8 +47,10 @@ public class Login extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		if (getLoginId().equals("hello") && getPassword().equals("123"))
-
+		{
+		log.info("Login Successfully...");
 			return "success";
+		}
 		else {
 			setLoginError("INVALID CREDENTIALS");
 			return "error";
@@ -59,19 +61,17 @@ public class Login extends ActionSupport {
 	@Override
 	public void validate() {
 		if (getLoginId().equals("")) {
-             CloudPrinterLogger.log4j(FQCN, com.cloudprinter.logger.CloudPrinterLogger.LOG.ERROR, "Invalid login Id", null);
+			log.warning("Invalid id...");
 			addFieldError("loginId", "Please enter login-id...");
 			setLoginError("INVALID CREDENTIALS");
 		}
 		if (getMailId().equals("")) {
-			CloudPrinterLogger.log4j(FQCN, com.cloudprinter.logger.CloudPrinterLogger.LOG.ERROR, "Invalid email Id", null);
+			log.warning("invalid id...");
 			addFieldError("mailId", "Please enter mail-id...");
 			setLoginError("INVALID CREDENTIALS");
 		}
 		if (getPassword().equals("")) {
-			CloudPrinterLogger.log4j(FQCN,
-					com.cloudprinter.logger.CloudPrinterLogger.LOG.ERROR,
-					"Invalid password", null);
+			log.warning("invalid id...");
 			addFieldError("password", "Please enter password...");
 			setLoginError("INVALID CREDENTIALS");
 		}
