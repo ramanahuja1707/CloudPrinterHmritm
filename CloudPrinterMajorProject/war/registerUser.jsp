@@ -27,6 +27,8 @@
 		</s:form>
 		<s:property value="registrationStatus" />
 		<s:property value="registrationError" />
+		
+		<a href="login.jsp">Go Back To Login Page</a>
 	</center>
 </body>
 </html>

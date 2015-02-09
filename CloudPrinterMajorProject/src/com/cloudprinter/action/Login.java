@@ -1,16 +1,21 @@
 package com.cloudprinter.action;
 
+import java.util.Map;
 import java.util.logging.Logger;
 
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.cloudprinter.services.AuthenticateUserService;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
-public class Login extends ActionSupport {
+public class Login extends ActionSupport implements SessionAware {
 	private static final Logger log = Logger.getLogger(Login.class.getName());
 	private String loginId;
 	private String mailId;
 	private String password;
 	private String loginError;
+	private Map session;
 
 	public String getLoginError() {
 		return loginError;
@@ -46,12 +51,16 @@ public class Login extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
-		if (getLoginId().equals("hello") && getPassword().equals("123"))
-		{
-		log.info("Login Successfully...");
+		AuthenticateUserService userLogin = new AuthenticateUserService();
+
+		if (userLogin.authenticateUserLogin(getLoginId(), getMailId(),
+				getPassword()).equals("exist")) {
+			session.put("emailId", getMailId());
+			session.put("loginId", getLoginId());
+			session.put("password", getPassword());
+			log.info("Login Successfully...");
 			return "success";
-		}
-		else {
+		} else {
 			setLoginError("INVALID CREDENTIALS");
 			return "error";
 		}
@@ -63,18 +72,23 @@ public class Login extends ActionSupport {
 		if (getLoginId().equals("")) {
 			log.warning("Invalid id...");
 			addFieldError("loginId", "Please enter login-id...");
-			setLoginError("INVALID CREDENTIALS");
+
 		}
 		if (getMailId().equals("")) {
 			log.warning("invalid id...");
 			addFieldError("mailId", "Please enter mail-id...");
-			setLoginError("INVALID CREDENTIALS");
+
 		}
 		if (getPassword().equals("")) {
 			log.warning("invalid id...");
 			addFieldError("password", "Please enter password...");
-			setLoginError("INVALID CREDENTIALS");
+
 		}
 
+	}
+
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		session = arg0;
 	}
 }

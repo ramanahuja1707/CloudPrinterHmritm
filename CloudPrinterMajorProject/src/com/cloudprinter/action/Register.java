@@ -48,7 +48,7 @@ public class Register extends ActionSupport {
 	public String execute() {
 
 		AuthenticateUserService authenticateUser = new AuthenticateUserService();
-		String userStatus = authenticateUser.authenticateUser(
+		String userStatus = authenticateUser.authenticateUserEmailId(
 				getUserInformation().getLoginId(), getUserInformation()
 						.getEmailId());
 		if (userStatus.matches("not_exist")) {

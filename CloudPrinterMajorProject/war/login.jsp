@@ -11,31 +11,34 @@
 <body>
 	<center>
 		<h1>Cloud Printer HMRITM</h1>
-		<form action="login" method="post">
+		<s:form action="login" method="post">
 			<table>
 
 				<tr>
-					<td>Login Id:<input type="text" name="loginId" /></td>
+					<td><s:textfield label="Login Id" key="loginId" /></td>
 				</tr>
 				<tr>
 
-					<td>Password:<input type="password" name="password" /></td>
+					<td><s:textfield label="Password" key="password" /></td>
 				</tr>
 				<tr>
 
-					<td>Mail Id:<input type="text" name="mailId" /></td>
+					<td><s:textfield label="Email Id" key="mailId" /></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="Login" /></td>
+					<td><s:textfield type="submit" value="Login" /></td>
 				</tr>
 			</table>
 			<s:property value="loginError" />
 			<s:property value="registrationStatus" />
+			<s:property value="logoutStatus" />
 			<br>
 
-		</form>
-		<br> <a href="registerUser.jsp"><input type="button"
-			value="Register"></a>
+		</s:form>
+		<br>
+		<a href="forgotLoginId.jsp">Forgot Login Id ?</a><br> <a
+			href="forgotPassword.jsp">Forgot Password ?</a><br> <br> <a
+			href="registerUser.jsp"><input type="button" value="Register"></a>
 	</center>
 </body>
 </html>

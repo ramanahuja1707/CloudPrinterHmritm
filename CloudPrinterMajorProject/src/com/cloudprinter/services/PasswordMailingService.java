@@ -22,7 +22,7 @@ public class PasswordMailingService {
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 
-		String msgBody = "Welcome to Cloud Printer Hmritm....\n"
+		String msgBody = "Mail From Cloud Printer Hmritm....\n"
 				+ "Your Login Id & Password is :\n" + loginId + "\n" + password;
 
 		Message msg = new MimeMessage(session);

@@ -8,13 +8,14 @@
 <title>Cloud Printer HMRITM</title>
 </head>
 <body>
-	<s:if test="#session.loginId!=null">
-		Successfully Logged In...Welcome <s:property value="#session.emailId" />
-		<br>
-	</s:if>
-	<s:else>
-		<jsp:forward page="notInSession.jsp" />
-	</s:else>
-	<a href="logout">Logout</a>
+	<s:form action="forgotpassword" method="post">
+		<s:textfield label="Enter Email Id" key="emailId" />
+		<s:textfield label="Enter Login Id" key="loginId" />
+		<s:submit value="Get Password" />
+	</s:form>
+	<br>
+	<br>
+	<s:property value="forgotPasswordStatus"/><br>
+	<a href="login.jsp">Go Back To Login Page</a>
 </body>
 </html>
